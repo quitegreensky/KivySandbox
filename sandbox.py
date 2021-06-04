@@ -29,14 +29,17 @@ class ScreenSandBox(BoxLayout):
     """
     screen diagonal size in inches
     """
+
     screen_width = NumericProperty()
     """
     screen width in pixel
     """
+
     screen_height = NumericProperty()
     """
     screen height in pixel
     """
+
     scale = NumericProperty(1)
     """
     use scale to change the size of the layout. default is 1
@@ -53,10 +56,7 @@ class ScreenSandBox(BoxLayout):
         self._default_fontscale = Metrics.fontscale
 
     def __enter__(self):
-        density = self.fakeDensity()
-        dpi = self.fakeDpi()
-        fontscale = 1
-        self.set_metrics(density, dpi, fontscale)
+        self.set_metrics(self.fakeDensity(), self.fakeDpi(), 1)
         return self
 
     def __exit__(self, *args):
@@ -77,9 +77,11 @@ class ScreenSandBox(BoxLayout):
         """
         reverts density, dpi and fontscale to default values
         """
-        Metrics.density = self._default_density
-        Metrics.dpi = self._default_dpi
-        Metrics.fontscale = self._default_fontscale
+        self.set_metrics(
+            self._default_density,
+            self._default_dpi,
+            self._default_fontscale
+        )
 
     def ratio(self):
         """
@@ -119,16 +121,10 @@ class ScreenSandBox(BoxLayout):
         """
         new density in scaled screen
         """
-        real_density = self.density()
-        real_width = self.screen_width
-        fake_width = self.width
-        return (fake_width * real_density) / real_width
+        return self.density() * self.scale
 
     def fakeDpi(self):
         """
         new dpi in scaled screen
         """
-        real_dpi = self.dpi()
-        real_width = self.screen_width
-        fake_width = self.width
-        return (fake_width * real_dpi) / real_width
+        return self.dpi() * self.scale

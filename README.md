@@ -1,0 +1,1 @@
+Simulate your widgets based on devices with different resulotions and sizes

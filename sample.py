@@ -75,8 +75,10 @@ class MainApp(App):
             # initialize widgets here
             print(dp(1))
             real_dpi = sandbox.dpi()
+            height, width = sandbox.screen_height, sandbox.screen_width
+            diagonal = sandbox.diagonal_inches
             wid = TestButton()
-            label = TestLabel(text=f"1920*1080 4.7 inches {int(real_dpi)} dpi")
+            label = TestLabel(text=f"{height}*{width} {diagonal} inches {int(real_dpi)} dpi")
             sandbox.add_widget(wid)
             sandbox.add_widget(label)
 
@@ -84,8 +86,10 @@ class MainApp(App):
             # initialize widgets here
             print(dp(1))
             real_dpi = sandbox.dpi()
+            height, width = sandbox.screen_height, sandbox.screen_width
+            diagonal = sandbox.diagonal_inches
             wid = TestButton()
-            label = TestLabel(text=f"1200*825 9.7 inches {int(real_dpi)} dpi")
+            label = TestLabel(text=f"{height}*{width} {diagonal} inches {int(real_dpi)} dpi")
             sandbox.add_widget(wid)
             sandbox.add_widget(label)
 
